@@ -1,0 +1,67 @@
+[
+  {
+    "id": "cancel-24h-refund",
+    "audience": ["student", "tutor"],
+    "category": "payment",
+    "question": {
+      "KR": "수업 취소 시 환불은 어떻게 되나요?",
+      "EN": "What is the lesson cancellation refund policy?"
+    },
+    "answer": {
+      "KR": "24시간 이전: 100% 환불 또는 횟수 차감 없음. 24시간~12시간 전: 50% 환불 또는 수업료의 50% 차감. 12시간 미만~당일: 환불 불가(강사에게 수업료 100% 지급).",
+      "EN": ">24h: 100% refund or no credit deducted. 24–12h: 50% refund or 50% fee deducted. <12h/same day: no refund (tutor paid 100%)."
+    }
+  },
+  {
+    "id": "no-kakao-contact",
+    "audience": ["student", "tutor"],
+    "category": "safety",
+    "question": {
+      "KR": "튜터와 카카오톡 등 개인 연락처를 교환해도 되나요?",
+      "EN": "Can I exchange KakaoTalk or other personal contacts with a tutor?"
+    },
+    "answer": {
+      "KR": "아니요. 개인 연락처 교환과 플랫폼 밖 직거래는 금지되며, 외부 거래 피해는 보상되지 않습니다.",
+      "EN": "No. Sharing personal contacts or arranging off-platform deals is prohibited and not covered."
+    }
+  },
+  {
+    "id": "video-join-troubleshoot",
+    "audience": ["student", "tutor"],
+    "category": "lesson",
+    "question": {
+      "KR": "화상 수업 접속 오류가 나면 어떻게 하나요?",
+      "EN": "What should I do if I cannot join the video lesson?"
+    },
+    "answer": {
+      "KR": "브라우저 권한·네트워크를 점검한 뒤 재접속하고, 계속 실패하면 고객센터에 수업 번호로 문의해 주세요.",
+      "EN": "Check browser permissions and network, retry, then contact support with your lesson ID if it still fails."
+    }
+  },
+  {
+    "id": "tutor-payout-cycle-fee",
+    "audience": ["tutor"],
+    "category": "payout",
+    "question": {
+      "KR": "튜터 수강료 정산 주기와 수수료는 어떻게 되나요?",
+      "EN": "What is the tutor payout cycle and fee policy?"
+    },
+    "answer": {
+      "KR": "완료 수업 수익은 지갑에 적립되며, 최소 금액 충족 시 출금 신청이 가능합니다. 수수료는 정산 화면에서 확인합니다. 12시간 미만 수강생 취소 시 해당 수업료 100%가 정산에 반영될 수 있습니다.",
+      "EN": "Completed-lesson earnings credit your wallet; request payout above the minimum. Fees are on the payout screen. Learner cancels under 12h may pay out 100% of that lesson fee."
+    }
+  },
+  {
+    "id": "tutor-apply-video-review",
+    "audience": ["tutor"],
+    "category": "lesson",
+    "question": {
+      "KR": "튜터 지원과 소개 영상 심사는 어떻게 진행되나요?",
+      "EN": "How do tutor applications and intro-video reviews work?"
+    },
+    "answer": {
+      "KR": "강사되기에서 소개 영상 등 서류를 제출하면 운영팀이 심사 후 결과를 알립니다.",
+      "EN": "Submit your intro video via Teach onboarding; our team reviews and notifies you of the result."
+    }
+  }
+]

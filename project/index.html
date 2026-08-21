@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#059669" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Speako" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Speako" />
+    <title>Speako Language Learning Platform</title>
+    <meta name="description" content="Speako - 전 세계 원어민 튜터와 1:1로 만나는 맞춤형 언어 학습 플랫폼. 검증된 튜터, 합리적인 가격, 내가 원하는 시간에." />
+    <meta property="og:image" content="https://speako.one/og-image.png" />
+    <meta property="og:url" content="https://speako.one" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Speako" />
+    <meta property="og:title" content="Speako Language Learning Platform" />
+    <meta property="og:description" content="전 세계 원어민 튜터와 1:1로 만나는 맞춤형 언어 학습 플랫폼. 검증된 튜터, 합리적인 가격, 내가 원하는 시간에." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://speako.one/og-image.png" />
+    <meta name="twitter:title" content="Speako Language Learning Platform" />
+    <meta name="twitter:description" content="전 세계 원어민 튜터와 1:1로 만나는 맞춤형 언어 학습 플랫폼" />
+    <link rel="canonical" href="https://speako.one" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          const isLocal =
+            location.hostname === 'localhost' ||
+            location.hostname === '127.0.0.1';
+          if (isLocal) {
+            navigator.serviceWorker.getRegistrations().then((regs) => {
+              regs.forEach((reg) => reg.unregister());
+            });
+            return;
+          }
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

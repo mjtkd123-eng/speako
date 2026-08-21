@@ -12,6 +12,8 @@ import {
 } from 'lucide-react';
 import { t, type UiLang } from '@/i18n';
 import WalletBadge from '@/components/WalletBadge';
+import AuthModal from '@/components/AuthModal';
+import { COURSES_URL } from '@/lib/store-url';
 
 type Props = {
   selectedLang: string;
@@ -39,12 +41,14 @@ export default function Navbar({
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'signup' | 'login'>('signup');
+  const [authOpen, setAuthOpen] = useState(false);
 
   const navLinks = [
-    { href: '#tutors', label: t('nav', 'findTutor', uiLang), action: null as null | 'become-tutor' },
+    { href: '#tutors', label: t('nav', 'findTutor', uiLang), action: null as null | 'become-tutor' | 'ebook' },
     { href: '#group', label: t('nav', 'groupClass', uiLang), action: null },
     { href: '#become-tutor', label: t('nav', 'becomeTutor', uiLang), action: 'become-tutor' as const },
     { href: '#/community', label: t('nav', 'community', uiLang), action: null },
+    { href: 'ebook', label: t('nav', 'ebook', uiLang), action: 'ebook' as const },
   ];
 
   useEffect(() => {
@@ -97,6 +101,14 @@ export default function Navbar({
                 >
                   {link.label}
                 </button>
+              ) : link.action === 'ebook' ? (
+                <a
+                  key={link.href}
+                  href={COURSES_URL}
+                  className="whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900 lg:px-3.5"
+                >
+                  {link.label}
+                </a>
               ) : (
                 <a
                   key={link.href}
@@ -144,7 +156,10 @@ export default function Navbar({
               aria-label="Auth"
             >
               <button
-                onClick={() => setAuthMode('signup')}
+                onClick={() => {
+                  setAuthMode('signup');
+                  setAuthOpen(true);
+                }}
                 className={`rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors ${
                   authMode === 'signup'
                     ? 'bg-primary-600 text-white shadow-sm'
@@ -154,7 +169,10 @@ export default function Navbar({
                 {t('nav', 'signup', uiLang)}
               </button>
               <button
-                onClick={() => setAuthMode('login')}
+                onClick={() => {
+                  setAuthMode('login');
+                  setAuthOpen(true);
+                }}
                 className={`rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors ${
                   authMode === 'login'
                     ? 'bg-primary-600 text-white shadow-sm'
@@ -253,8 +271,20 @@ export default function Navbar({
             setDrawerOpen(false);
             onNavigateAdmin();
           }}
+          onOpenAuth={(mode) => {
+            setDrawerOpen(false);
+            setAuthMode(mode);
+            setAuthOpen(true);
+          }}
         />
       )}
+      <AuthModal
+        uiLang={uiLang}
+        open={authOpen}
+        mode={authMode === 'login' ? 'login' : 'signup'}
+        onModeChange={setAuthMode}
+        onClose={() => setAuthOpen(false)}
+      />
     </>
   );
 }
@@ -272,6 +302,7 @@ type DrawerProps = {
   adminMode: boolean;
   onToggleAdmin: () => void;
   onNavigateAdmin: () => void;
+  onOpenAuth: (mode: 'signup' | 'login') => void;
 };
 
 function MobileDrawer({
@@ -285,6 +316,7 @@ function MobileDrawer({
   adminMode,
   onToggleAdmin,
   onNavigateAdmin,
+  onOpenAuth,
 }: DrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -340,7 +372,7 @@ function MobileDrawer({
               aria-label="Auth"
             >
               <button
-                onClick={() => onAuthModeChange('signup')}
+                onClick={() => onOpenAuth('signup')}
                 className={`flex-1 rounded-full px-4 py-2.5 text-sm font-semibold transition-colors ${
                   authMode === 'signup'
                     ? 'bg-primary-600 text-white shadow-sm'
@@ -350,7 +382,7 @@ function MobileDrawer({
                 {t('nav', 'signup', uiLang)}
               </button>
               <button
-                onClick={() => onAuthModeChange('login')}
+                onClick={() => onOpenAuth('login')}
                 className={`flex-1 rounded-full px-4 py-2.5 text-sm font-semibold transition-colors ${
                   authMode === 'login'
                     ? 'bg-primary-600 text-white shadow-sm'
@@ -419,6 +451,13 @@ function MobileDrawer({
               className="block rounded-xl px-3.5 py-3 text-sm font-semibold text-ink-800 transition-colors hover:bg-ink-50"
             >
               {t('nav', 'community', uiLang)}
+            </a>
+            <a
+              href={COURSES_URL}
+              onClick={onClose}
+              className="block rounded-xl px-3.5 py-3 text-sm font-semibold text-ink-800 transition-colors hover:bg-ink-50"
+            >
+              {t('nav', 'ebook', uiLang)}
             </a>
           </div>
 

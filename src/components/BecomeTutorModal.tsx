@@ -12,15 +12,16 @@ type Props = {
 
 const PROVIDERS: {
   id: SocialProvider;
-  labelKey: 'google' | 'kakao' | 'apple' | 'facebook';
+  labelKey: 'kakao' | 'facebook' | 'instagram' | 'google' | 'apple';
   bg: string;
   text: string;
   icon: string;
 }[] = [
-  { id: 'google', labelKey: 'google', bg: 'bg-white border border-ink-200 hover:bg-ink-50', text: 'text-ink-800', icon: 'G' },
   { id: 'kakao', labelKey: 'kakao', bg: 'bg-[#FEE500] hover:brightness-95', text: 'text-[#191919]', icon: 'K' },
-  { id: 'apple', labelKey: 'apple', bg: 'bg-ink-900 hover:bg-ink-800', text: 'text-white', icon: '' },
   { id: 'facebook', labelKey: 'facebook', bg: 'bg-[#1877F2] hover:brightness-95', text: 'text-white', icon: 'f' },
+  { id: 'instagram', labelKey: 'instagram', bg: 'bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] hover:brightness-95', text: 'text-white', icon: 'IG' },
+  { id: 'google', labelKey: 'google', bg: 'bg-white border border-ink-200 hover:bg-ink-50', text: 'text-ink-800', icon: 'G' },
+  { id: 'apple', labelKey: 'apple', bg: 'bg-ink-900 hover:bg-ink-800', text: 'text-white', icon: '' },
 ];
 
 export default function BecomeTutorModal({ uiLang, open, onClose }: Props) {

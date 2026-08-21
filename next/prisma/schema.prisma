@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+enum Role {
+  USER
+  TUTOR
+  ADMIN
+}
+
+enum ProductOption {
+  VOD
+  EBOOK
+  PACKAGE
+}
+
+enum SettlementStatus {
+  PENDING
+  PAID
+}
+
+model User {
+  id              String    @id @default(cuid())
+  name            String?
+  email           String?   @unique
+  emailVerified   DateTime?
+  image           String?
+  passwordHash    String?
+  phone           String?
+  role            Role      @default(USER)
+  stripeAccountId String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  accounts        Account[]
+  sessions        Session[]
+  purchases       Purchase[]
+  courses         Course[]  @relation("TutorCourses")
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Course {
+  id           String     @id @default(cuid())
+  slug         String     @unique
+  title        String
+  subtitle     String
+  description  String
+  thumbnail    String
+  tutorId      String
+  tutor        User       @relation("TutorCourses", fields: [tutorId], references: [id])
+  hasVod       Boolean    @default(true)
+  hasEbook     Boolean    @default(true)
+  vodPrice     Int        @default(0)
+  ebookPrice   Int        @default(0)
+  packagePrice Int        @default(0)
+  vodUrl       String?
+  ebookPath    String?
+  createdAt    DateTime   @default(now())
+  purchases    Purchase[]
+}
+
+model Purchase {
+  id                     String           @id @default(cuid())
+  userId                 String
+  user                   User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId               String
+  course                 Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  option                 ProductOption
+  hasAccess              Boolean          @default(false)
+  amountGross            Int
+  stripeFee              Int              @default(0)
+  platformFee            Int              @default(0)
+  netPayout              Int              @default(0)
+  internationalCard      Boolean          @default(false)
+  cardBrand              String?
+  cardCountry            String?
+  status                 SettlementStatus @default(PENDING)
+  stripeSessionId        String?          @unique
+  stripePaymentIntentId  String?
+  stripeChargeId         String?
+  stripeBalanceTxId      String?
+  vodProgress            Int              @default(0)
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+
+  @@index([userId, courseId])
+  @@index([status])
+}

@@ -17,7 +17,7 @@ import {
   TUTOR_ONBOARDING_HASH,
 } from '@/lib/tutor-onboarding';
 
-export type SocialProvider = 'google' | 'kakao' | 'apple' | 'facebook';
+export type SocialProvider = 'google' | 'kakao' | 'apple' | 'facebook' | 'instagram';
 
 type AuthContextValue = {
   user: User | null;
@@ -25,6 +25,13 @@ type AuthContextValue = {
   loading: boolean;
   isLoggedIn: boolean;
   signInWithSocial: (provider: SocialProvider, redirectHash?: string) => Promise<{ error?: string }>;
+  signInWithEmail: (email: string, password: string) => Promise<{ error?: string }>;
+  signUpWithEmail: (input: {
+    email: string;
+    password: string;
+    name: string;
+    phone: string;
+  }) => Promise<{ error?: string }>;
   signOut: () => Promise<void>;
   /** Logged-in → go onboarding; otherwise caller should open auth modal */
   startTutorApply: (openAuthModal: () => void) => void;
@@ -37,6 +44,7 @@ const PROVIDER_MAP: Record<SocialProvider, Provider> = {
   kakao: 'kakao',
   apple: 'apple',
   facebook: 'facebook',
+  instagram: 'facebook',
 };
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -109,6 +117,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [],
   );
 
+  const signInWithEmail = useCallback(async (email: string, password: string) => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) return { error: error.message };
+    return {};
+  }, []);
+
+  const signUpWithEmail = useCallback(
+    async (input: { email: string; password: string; name: string; phone: string }) => {
+      const { error } = await supabase.auth.signUp({
+        email: input.email,
+        password: input.password,
+        options: { data: { name: input.name, phone: input.phone } },
+      });
+      if (error) return { error: error.message };
+      return {};
+    },
+    [],
+  );
+
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
   }, []);
@@ -132,10 +159,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       loading,
       isLoggedIn: !!session?.user,
       signInWithSocial,
+      signInWithEmail,
+      signUpWithEmail,
       signOut,
       startTutorApply,
     }),
-    [session, loading, signInWithSocial, signOut, startTutorApply],
+    [session, loading, signInWithSocial, signInWithEmail, signUpWithEmail, signOut, startTutorApply],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

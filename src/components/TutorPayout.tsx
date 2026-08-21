@@ -17,6 +17,7 @@ import {
 import { useWallet } from '@/lib/wallet-context';
 import { t, type UiLang } from '@/i18n';
 import { COMMISSION_RATE, EARLY_BIRD_COMMISSION_RATE } from '@/lib/wallet-types';
+import { TUTOR_SETTLEMENTS_URL } from '@/lib/store-url';
 
 type Props = {
   uiLang: UiLang;
@@ -99,6 +100,17 @@ export default function TutorPayout({ uiLang, onBack }: Props) {
             <p className="text-sm text-ink-500">{t('wallet', 'tutorDashboard', uiLang)}</p>
           </div>
         </div>
+
+        <a
+          href={TUTOR_SETTLEMENTS_URL}
+          className="mb-6 flex items-center justify-between rounded-2xl border border-primary-200 bg-primary-50 px-5 py-4 transition-colors hover:bg-primary-100"
+        >
+          <div>
+            <p className="font-display text-lg font-bold text-ink-900">{t('wallet', 'contentSettlements', uiLang)}</p>
+            <p className="mt-1 text-sm text-ink-500">{t('wallet', 'contentSettlementsDesc', uiLang)}</p>
+          </div>
+          <ArrowRight className="h-5 w-5 shrink-0 text-primary-700" />
+        </a>
 
         {/* Stats cards */}
         <div className="grid gap-4 sm:grid-cols-3">

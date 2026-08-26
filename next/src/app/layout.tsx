@@ -19,8 +19,8 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Speako Store",
-  description: "VOD·전자책 결제와 튜터 정산을 한곳에서.",
+  title: "Speako",
+  description: "원어민 튜터와 함께하는 1:1 실시간 화상 언어 학습.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

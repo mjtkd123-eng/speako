@@ -37,7 +37,6 @@ yarn-error.log*
 # local sqlite
 *.db
 *.db-journal
-/content/ebooks/*.pdf
 
 # vercel
 .vercel

@@ -1,54 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { useAuthModal } from "@/components/auth-modals";
-
-function isContentSection(pathname: string) {
-  return (
-    pathname.startsWith("/courses") ||
-    pathname.startsWith("/my-courses") ||
-    pathname.startsWith("/checkout") ||
-    pathname.startsWith("/tutor")
-  );
-}
 
 export function SiteHeader() {
   const { data } = useSession();
   const { openLogin, openSignup } = useAuthModal();
-  const pathname = usePathname();
-  const isTutor = data?.user?.role === "TUTOR";
-  const contentSection = isContentSection(pathname);
 
   return (
     <header className="sticky top-0 z-30 border-b border-ink-100 bg-white/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link
-          href={contentSection ? "/courses" : "/"}
-          className="font-display text-xl font-extrabold text-brand-700"
-        >
+        <Link href="/" className="font-display text-xl font-extrabold text-brand-700">
           Speako
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium text-ink-600 md:flex">
-          {!contentSection && (
-            <Link href="/" className="hover:text-ink-900">
-              1:1 선생님
-            </Link>
-          )}
-          <Link href="/courses" className="hover:text-ink-900">
-            E-book(콘텐츠)
+          <Link href="/" className="hover:text-ink-900">
+            1:1 선생님
           </Link>
-          {data?.user && (
-            <Link href="/my-courses" className="hover:text-ink-900">
-              내 강의실
-            </Link>
-          )}
-          {isTutor && (
-            <Link href="/tutor/settlements" className="hover:text-ink-900">
-              결산 대시보드
-            </Link>
-          )}
         </nav>
         <div className="flex items-center gap-2">
           {data?.user ? (

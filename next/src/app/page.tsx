@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const TUTORS = [
   { name: "Emma Wilson", lang: "영어 · 미국", price: "$21", trial: "$9", blurb: "비즈니스 영어와 IELTS 밀착 코칭" },
   { name: "Haruto Tanaka", lang: "일본어 · 일본", price: "$18", trial: "$7", blurb: "JLPT 레벨 맞춤 커리큘럼" },
@@ -72,21 +70,6 @@ export default function HomePage() {
               </p>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="border-y border-ink-100 bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-12 sm:flex-row sm:items-center">
-          <div>
-            <h2 className="font-display text-2xl font-extrabold">VOD · 전자책 스토어</h2>
-            <p className="mt-1 text-sm text-ink-500">수업 외에 영상과 PDF를 결제하고 바로 볼 수 있습니다.</p>
-          </div>
-          <Link
-            href="/courses"
-            className="inline-flex h-12 items-center rounded-2xl bg-ink-900 px-6 font-bold text-white hover:bg-ink-800"
-          >
-            콘텐츠 페이지로 이동
-          </Link>
         </div>
       </section>
     </div>

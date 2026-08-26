@@ -11,7 +11,6 @@ export const STRINGS = {
     groupClass: { KR: '그룹수업', EN: 'Group Classes' },
     becomeTutor: { KR: '강사되기', EN: 'Teach' },
     community: { KR: '커뮤니티', EN: 'Community' },
-    ebook: { KR: 'E-book(콘텐츠)', EN: 'E-book' },
     login: { KR: '로그인', EN: 'Log In' },
     signup: { KR: '가입', EN: 'Sign Up' },
     openMenu: { KR: '메뉴 열기', EN: 'Open menu' },
@@ -299,11 +298,6 @@ export const STRINGS = {
     // Tutor Payout
     tutorDashboard: { KR: '튜터 대시보드', EN: 'Tutor Dashboard' },
     payoutPage: { KR: '출금 신청', EN: 'Payout Request' },
-    contentSettlements: { KR: '콘텐츠 결산', EN: 'Content settlements' },
-    contentSettlementsDesc: {
-      KR: '전자책·VOD 판매 정산은 콘텐츠 결산 대시보드에서 확인할 수 있습니다.',
-      EN: 'View ebook and VOD payouts in the content settlements dashboard.',
-    },
     totalEarnings: { KR: '총 수익', EN: 'Total Earnings' },
     availableBalance: { KR: '출금 가능 금액', EN: 'Available Balance' },
     platformFees: { KR: '플랫폼 수수료 누적', EN: 'Total Platform Fees' },
@@ -451,11 +445,6 @@ export const STRINGS = {
     adminMode: { KR: '어드민 모드', EN: 'Admin Mode' },
     backToSite: { KR: '사이트로', EN: 'Back to Site' },
     dashboard: { KR: '대시보드', EN: 'Dashboard' },
-    contentSettlements: { KR: '콘텐츠 결산', EN: 'Content settlements' },
-    contentSettlementsDesc: {
-      KR: '전자책·VOD 판매 정산은 콘텐츠 결산 대시보드에서 확인할 수 있습니다.',
-      EN: 'View ebook and VOD payouts in the content settlements dashboard.',
-    },
     tutors: { KR: '튜터 승인 관리', EN: 'Tutor Approval' },
     students: { KR: '수강생 관리', EN: 'Students' },
     payments: { KR: '포인트/결제 내역', EN: 'Payments' },

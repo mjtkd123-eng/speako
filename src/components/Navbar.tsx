@@ -13,7 +13,6 @@ import {
 import { t, type UiLang } from '@/i18n';
 import WalletBadge from '@/components/WalletBadge';
 import AuthModal from '@/components/AuthModal';
-import { COURSES_URL } from '@/lib/store-url';
 
 type Props = {
   selectedLang: string;
@@ -44,11 +43,10 @@ export default function Navbar({
   const [authOpen, setAuthOpen] = useState(false);
 
   const navLinks = [
-    { href: '#tutors', label: t('nav', 'findTutor', uiLang), action: null as null | 'become-tutor' | 'ebook' },
+    { href: '#tutors', label: t('nav', 'findTutor', uiLang), action: null as null | 'become-tutor' },
     { href: '#group', label: t('nav', 'groupClass', uiLang), action: null },
     { href: '#become-tutor', label: t('nav', 'becomeTutor', uiLang), action: 'become-tutor' as const },
     { href: '#/community', label: t('nav', 'community', uiLang), action: null },
-    { href: 'ebook', label: t('nav', 'ebook', uiLang), action: 'ebook' as const },
   ];
 
   useEffect(() => {
@@ -101,14 +99,6 @@ export default function Navbar({
                 >
                   {link.label}
                 </button>
-              ) : link.action === 'ebook' ? (
-                <a
-                  key={link.href}
-                  href={COURSES_URL}
-                  className="whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900 lg:px-3.5"
-                >
-                  {link.label}
-                </a>
               ) : (
                 <a
                   key={link.href}
@@ -451,13 +441,6 @@ function MobileDrawer({
               className="block rounded-xl px-3.5 py-3 text-sm font-semibold text-ink-800 transition-colors hover:bg-ink-50"
             >
               {t('nav', 'community', uiLang)}
-            </a>
-            <a
-              href={COURSES_URL}
-              onClick={onClose}
-              className="block rounded-xl px-3.5 py-3 text-sm font-semibold text-ink-800 transition-colors hover:bg-ink-50"
-            >
-              {t('nav', 'ebook', uiLang)}
             </a>
           </div>
 
